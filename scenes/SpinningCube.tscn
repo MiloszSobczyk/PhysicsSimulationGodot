@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://bloob0cdrwg5i"]
+
+[ext_resource type="Script" uid="uid://drnlr6pmjsd3b" path="res://scripts/SpinningCube.cs" id="1_su2a3"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_mtw64"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mtw64"]
+albedo_color = Color(0.32643694, 7.169075e-05, 0.3264344, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mtw64"]
+
+[node name="SpinningCube" type="Node3D"]
+script = ExtResource("1_su2a3")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+mesh = SubResource("BoxMesh_mtw64")
+surface_material_override/0 = SubResource("StandardMaterial3D_mtw64")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("BoxShape3D_mtw64")
