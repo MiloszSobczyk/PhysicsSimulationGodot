@@ -1,5 +1,6 @@
 using Godot;
-using System;
+
+namespace PhysicsSimulationGodot.scripts;
 
 public partial class SpinningCube : Node3D
 {

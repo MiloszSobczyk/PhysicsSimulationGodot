@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bd3ogr6uyxkoj"]
+
+[ext_resource type="Script" uid="uid://b6m6lcbnm3x7t" path="res://scripts/LightToPoint.cs" id="1_vai1k"]
+
+[node name="LightToPoint" type="DirectionalLight3D"]
+light_energy = 0.8
+script = ExtResource("1_vai1k")

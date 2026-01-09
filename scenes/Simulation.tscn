@@ -1,32 +1,33 @@
-[gd_scene load_steps=5 format=3 uid="uid://c1bc5llbqd74s"]
+[gd_scene load_steps=6 format=3 uid="uid://c1bc5llbqd74s"]
 
+[ext_resource type="Script" uid="uid://b7flbioqlycao" path="res://scripts/Simulation.cs" id="1_3xw28"]
 [ext_resource type="PackedScene" uid="uid://bloob0cdrwg5i" path="res://scenes/SpinningCube.tscn" id="1_8tluy"]
-
-[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_8tluy"]
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_8tluy"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8tluy"]
-albedo_color = Color(0.22074488, 0.24314755, 0.2946454, 0.7372549)
+[ext_resource type="PackedScene" uid="uid://oqpwoe42pkdt" path="res://scenes/OrbitalCamera.tscn" id="1_xh7lv"]
+[ext_resource type="PackedScene" uid="uid://3sixmllhchmv" path="res://scenes/Floor.tscn" id="4_ea5gu"]
+[ext_resource type="PackedScene" uid="uid://bd3ogr6uyxkoj" path="res://scenes/LightToPoint.tscn" id="5_h3kva"]
 
 [node name="Simulation" type="Node3D"]
+script = ExtResource("1_3xw28")
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2699025, 2.7689295)
+[node name="OrbitalCamera" parent="." instance=ExtResource("1_xh7lv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 4)
 fov = 90.0
 
 [node name="SpinningCube" parent="." instance=ExtResource("1_8tluy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1736324, 0)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
+[node name="Floor" parent="." instance=ExtResource("4_ea5gu")]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-shape = SubResource("WorldBoundaryShape3D_8tluy")
+[node name="Lights" type="Node3D" parent="."]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
-mesh = SubResource("PlaneMesh_8tluy")
-surface_material_override/0 = SubResource("StandardMaterial3D_8tluy")
+[node name="LightToPoint" parent="Lights" instance=ExtResource("5_h3kva")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 3, 3)
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.76186955, 0.5032329, 0.40781295, 0.018695423, -0.61225635, 0.79043835, 0.64746064, 0.60983515, 0.45705128, 2.0716763, 4.6677604, 2.1623414)
+[node name="LightToPoint2" parent="Lights" instance=ExtResource("5_h3kva")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 3, -3)
+
+[node name="LightToPoint3" parent="Lights" instance=ExtResource("5_h3kva")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -3, -3)
+
+[node name="LightToPoint4" parent="Lights" instance=ExtResource("5_h3kva")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, -3, 3)

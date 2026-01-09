@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://oqpwoe42pkdt"]
+
+[ext_resource type="Script" uid="uid://bfsaq84o3fcho" path="res://scripts/OrbitalCamera.cs" id="1_5vowy"]
+
+[node name="OrbitalCamera" type="Camera3D"]
+script = ExtResource("1_5vowy")
