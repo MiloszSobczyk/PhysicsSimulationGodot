@@ -12,11 +12,19 @@ albedo_color = Color(0.32643694, 7.169075e-05, 0.3264344, 1)
 [node name="SpinningCube" type="Node3D"]
 script = ExtResource("1_su2a3")
 
-[node name="RigidBody3D" type="RigidBody3D" parent="."]
+[node name="Anchor" type="StaticBody3D" parent="."]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+[node name="Cube" type="RigidBody3D" parent="."]
+transform = Transform3D(0.7886749, -0.57735014, -0.21132481, 0.5773501, 0.57735014, 0.57735014, -0.2113248, -0.57735014, 0.788675, -5.9604645e-08, 0.86602545, -5.9604645e-08)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Cube"]
+transform = Transform3D(0.9999998, -7.4505806e-08, -2.0861626e-07, -1.0430813e-07, 0.99999994, -1.2665987e-07, 2.682209e-07, 2.6077032e-07, 0.9999999, 0, 0, 0)
 mesh = SubResource("BoxMesh_mtw64")
 surface_material_override/0 = SubResource("StandardMaterial3D_mtw64")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cube"]
 shape = SubResource("BoxShape3D_mtw64")
+
+[node name="PinJoint3D" type="PinJoint3D" parent="."]
+node_a = NodePath("../Anchor")
+node_b = NodePath("../Cube")
