@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bloob0cdrwg5i"]
+[gd_scene load_steps=8 format=3 uid="uid://bloob0cdrwg5i"]
 
 [ext_resource type="Script" uid="uid://drnlr6pmjsd3b" path="res://scripts/SpinningCube.cs" id="1_su2a3"]
 
@@ -22,6 +22,8 @@ _surfaces = [{
 "vertex_count": 2,
 "vertex_data": PackedByteArray(0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63)
 }]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_bl7gs"]
 
 [node name="SpinningCube" type="Node3D"]
 script = ExtResource("1_su2a3")
@@ -49,3 +51,8 @@ mesh = SubResource("ArrayMesh_su2a3")
 [node name="PinJoint3D" type="PinJoint3D" parent="."]
 node_a = NodePath("../Anchor")
 node_b = NodePath("../Cube")
+
+[node name="Trace" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Trace"]
+mesh = SubResource("ArrayMesh_bl7gs")

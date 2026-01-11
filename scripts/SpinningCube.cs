@@ -1,4 +1,6 @@
 using Godot;
+using System.Collections.Generic;
+using System.Linq; // Needed for converting Queue to Array
 
 namespace PhysicsSimulationGodot.scripts;
 
@@ -7,7 +9,18 @@ public partial class SpinningCube : Node3D
 {
     private RigidBody3D _cube;
     private MeshInstance3D _diagonalMeshInstance;
+    private MeshInstance3D _traceMeshInstance;
+    private readonly Queue<Vector3> _tracePoints = new Queue<Vector3>();
+    
+    private int _maxTracePoints = 1000;
     private float _tiltAngle = 0.0f;
+
+    [Export]
+    public int MaxTracePoints
+    {
+        get => _maxTracePoints;
+        set => _maxTracePoints = value;
+    }
 
     [Export(PropertyHint.Range, "0, 90")]
     public float TiltAngle
@@ -23,10 +36,14 @@ public partial class SpinningCube : Node3D
     [Export]
     public float SpinSpeed = 20.0f;
 
+
+
     public override void _Ready()
     {
         _cube = GetNode<RigidBody3D>("Cube");
+
         _diagonalMeshInstance = GetNode<MeshInstance3D>("Cube/Diagonal/MeshInstance3D");
+        _traceMeshInstance = GetNode<MeshInstance3D>("Trace/MeshInstance3D");
 
         ApplyTransform();
 
@@ -39,9 +56,49 @@ public partial class SpinningCube : Node3D
     public override void _Process(double delta)
     {
         base._Process(delta);
+
         DrawDiagonal();
+
+        if (!Engine.IsEditorHint())
+        {
+            UpdateTrace();
+        }
     }
 
+    private void UpdateTrace()
+    {
+        if (_traceMeshInstance == null || _cube == null) return;
+
+        Vector3 localTip = new Vector3(0.5f, 0.5f, 0.5f);
+        Vector3 globalTipPos = _cube.ToGlobal(localTip);
+
+        Vector3 pointForTrace = ToLocal(globalTipPos);
+
+        _tracePoints.Enqueue(pointForTrace);
+
+        if (_tracePoints.Count > _maxTracePoints)
+        {
+            _tracePoints.Dequeue();
+        }
+
+        if (_tracePoints.Count < 2) return;
+
+        ArrayMesh mesh = _traceMeshInstance.Mesh as ArrayMesh;
+        if (mesh == null)
+        {
+            mesh = new ArrayMesh();
+            _traceMeshInstance.Mesh = mesh;
+        }
+
+        var pointsArray = _tracePoints.ToArray();
+
+        var surfaceArray = new Godot.Collections.Array();
+        surfaceArray.Resize((int)Mesh.ArrayType.Max);
+        surfaceArray[(int)Mesh.ArrayType.Vertex] = pointsArray;
+
+        mesh.ClearSurfaces();
+        mesh.AddSurfaceFromArrays(Mesh.PrimitiveType.LineStrip, surfaceArray);
+    }
     private void ApplySpin()
     {
         if (_cube == null) return;
@@ -77,11 +134,8 @@ public partial class SpinningCube : Node3D
     {
         if (_diagonalMeshInstance == null) return;
 
-        Vector3 p1 = new Vector3(-0.5f, -0.5f, -0.5f);
-        Vector3 p2 = new Vector3(0.5f, 0.5f, 0.5f);
-
-        Vector3 start =  p1;
-        Vector3 end =  p2;
+        Vector3 start = new Vector3(-0.5f, -0.5f, -0.5f);
+        Vector3 end = new Vector3(0.5f, 0.5f, 0.5f);
 
         ArrayMesh mesh = _diagonalMeshInstance.Mesh as ArrayMesh;
         if (mesh == null)
@@ -92,7 +146,6 @@ public partial class SpinningCube : Node3D
 
         var surfaceArray = new Godot.Collections.Array();
         surfaceArray.Resize((int)Mesh.ArrayType.Max);
-
         surfaceArray[(int)Mesh.ArrayType.Vertex] = new Vector3[] { start, end };
 
         mesh.ClearSurfaces();
