@@ -19,10 +19,33 @@ public partial class SpinningCube : Node3D
         }
     }
 
+    [Export]
+    public float SpinSpeed = 20.0f;
+
     public override void _Ready()
     {
         _cube = GetNode<RigidBody3D>("Cube");
+        
         ApplyTransform();
+
+        if (!Engine.IsEditorHint())
+        {
+            ApplySpin();
+        }
+    }
+
+    private void ApplySpin()
+    {
+        if (_cube == null) return;
+
+        _cube.AngularDamp = 0.0f;
+        _cube.LinearDamp = 0.0f;
+
+        Vector3 localSpinAxis = new Vector3(1.0f, 1.0f, 1.0f).Normalized();
+
+        Vector3 globalSpinAxis = _cube.GlobalBasis * localSpinAxis;
+
+        _cube.AngularVelocity = globalSpinAxis * SpinSpeed;
     }
 
     private void ApplyTransform()
@@ -39,9 +62,7 @@ public partial class SpinningCube : Node3D
         _cube.Quaternion = finalRotation;
 
         Vector3 bottomCorner = new Vector3(-0.5f, -0.5f, -0.5f);
-
         Vector3 currentCornerOffset = finalRotation * bottomCorner;
-
         _cube.Position = -currentCornerOffset;
     }
 }
