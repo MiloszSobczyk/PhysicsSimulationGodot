@@ -1,13 +1,27 @@
-[gd_scene load_steps=5 format=3 uid="uid://bloob0cdrwg5i"]
+[gd_scene load_steps=7 format=3 uid="uid://bloob0cdrwg5i"]
 
 [ext_resource type="Script" uid="uid://drnlr6pmjsd3b" path="res://scripts/SpinningCube.cs" id="1_su2a3"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_mtw64"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mtw64"]
-albedo_color = Color(0.32643694, 7.169075e-05, 0.3264344, 1)
+transparency = 1
+albedo_color = Color(0.3254902, 0, 0.3254902, 0.7882353)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mtw64"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_su2a3"]
+albedo_color = Color(0, 0.6745098, 0.6784314, 1)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_su2a3"]
+_surfaces = [{
+"aabb": AABB(-0.5, -0.5, -0.5, 1, 1, 1),
+"format": 34359738369,
+"primitive": 1,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 2,
+"vertex_data": PackedByteArray(0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63)
+}]
 
 [node name="SpinningCube" type="Node3D"]
 script = ExtResource("1_su2a3")
@@ -15,7 +29,7 @@ script = ExtResource("1_su2a3")
 [node name="Anchor" type="StaticBody3D" parent="."]
 
 [node name="Cube" type="RigidBody3D" parent="."]
-transform = Transform3D(0.7886749, -0.57735014, -0.21132481, 0.5773501, 0.57735014, 0.57735014, -0.2113248, -0.57735014, 0.788675, -5.9604645e-08, 0.86602545, -5.9604645e-08)
+transform = Transform3D(0.7886749, -0.57735014, -0.21132481, 0.5773501, 0.57735014, 0.57735014, -0.2113248, -0.57735014, 0.78867495, -5.9604645e-08, 0.86602545, -5.9604645e-08)
 angular_damp_mode = 1
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Cube"]
@@ -25,6 +39,12 @@ surface_material_override/0 = SubResource("StandardMaterial3D_mtw64")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Cube"]
 shape = SubResource("BoxShape3D_mtw64")
+
+[node name="Diagonal" type="Node3D" parent="Cube"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Cube/Diagonal"]
+material_override = SubResource("StandardMaterial3D_su2a3")
+mesh = SubResource("ArrayMesh_su2a3")
 
 [node name="PinJoint3D" type="PinJoint3D" parent="."]
 node_a = NodePath("../Anchor")

@@ -14,8 +14,8 @@ transform = Transform3D(1, 0, 0, 0, 0.9701425, 0.24253564, 0, -0.24253564, 0.970
 fov = 90.0
 
 [node name="SpinningCube" parent="." instance=ExtResource("1_8tluy")]
-TiltAngle = 17.206
-SpinSpeed = 200.0
+TiltAngle = 18.434
+SpinSpeed = 0.0
 
 [node name="Floor" parent="." instance=ExtResource("4_ea5gu")]
 
