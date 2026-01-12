@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://bloob0cdrwg5i"]
+[gd_scene load_steps=9 format=3 uid="uid://bloob0cdrwg5i"]
 
 [ext_resource type="Script" uid="uid://drnlr6pmjsd3b" path="res://scripts/SpinningCube.cs" id="1_su2a3"]
+[ext_resource type="PackedScene" uid="uid://col458i56005y" path="res://scenes/SliderRow.tscn" id="2_bl7gs"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_mtw64"]
 
@@ -56,3 +57,36 @@ node_b = NodePath("../Cube")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Trace"]
 mesh = SubResource("ArrayMesh_bl7gs")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI"]
+offset_right = 40.0
+offset_bottom = 40.0
+alignment = 1
+
+[node name="StartStopButton" type="CheckButton" parent="UI/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+button_pressed = true
+action_mode = 0
+text = "Running"
+
+[node name="EdgeLengthRow" parent="UI/VBoxContainer" instance=ExtResource("2_bl7gs")]
+layout_mode = 2
+UseInteger = true
+
+[node name="DensityRow" parent="UI/VBoxContainer" instance=ExtResource("2_bl7gs")]
+layout_mode = 2
+
+[node name="TimestepRow" parent="UI/VBoxContainer" instance=ExtResource("2_bl7gs")]
+layout_mode = 2
+
+[node name="CubeTiltRow" parent="UI/VBoxContainer" instance=ExtResource("2_bl7gs")]
+layout_mode = 2
+
+[node name="AngularVelocityRow" parent="UI/VBoxContainer" instance=ExtResource("2_bl7gs")]
+layout_mode = 2
+
+[node name="TraceSizeRow" parent="UI/VBoxContainer" instance=ExtResource("2_bl7gs")]
+layout_mode = 2

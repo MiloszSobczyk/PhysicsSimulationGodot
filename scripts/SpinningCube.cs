@@ -11,9 +11,11 @@ public partial class SpinningCube : Node3D
     private MeshInstance3D _diagonalMeshInstance;
     private MeshInstance3D _traceMeshInstance;
     private readonly Queue<Vector3> _tracePoints = new Queue<Vector3>();
-    
+
     private int _maxTracePoints = 1000;
     private float _tiltAngle = 0.0f;
+    private Vector3 _savedAngularVelocity;
+    private Vector3 _savedLinearVelocity;
 
     [Export]
     public int MaxTracePoints
@@ -35,8 +37,7 @@ public partial class SpinningCube : Node3D
 
     [Export]
     public float SpinSpeed = 20.0f;
-
-
+    public bool Running { get; private set; } = true;
 
     public override void _Ready()
     {
@@ -44,6 +45,13 @@ public partial class SpinningCube : Node3D
 
         _diagonalMeshInstance = GetNode<MeshInstance3D>("Cube/Diagonal/MeshInstance3D");
         _traceMeshInstance = GetNode<MeshInstance3D>("Trace/MeshInstance3D");
+
+        Button button = GetNode<Button>("UI/VBoxContainer/StartStopButton");
+        button.SetPressedNoSignal(Running);
+        button.Pressed += () =>
+        {
+            ToggleCube();
+        };
 
         ApplyTransform();
 
@@ -62,6 +70,42 @@ public partial class SpinningCube : Node3D
         if (!Engine.IsEditorHint())
         {
             UpdateTrace();
+        }
+    }
+
+    public void Stop()
+    {
+        if (!Running) return;
+        
+        _savedAngularVelocity = _cube.AngularVelocity;
+        _savedLinearVelocity = _cube.LinearVelocity;
+
+        _cube.Freeze = true;
+        
+        Running = false;
+    }
+
+    public void Start()
+    {
+        if (Running) return;
+
+        _cube.Freeze = false;
+
+        _cube.AngularVelocity = _savedAngularVelocity;
+        _cube.LinearVelocity = _savedLinearVelocity;
+
+        Running = true;
+    }
+
+    private void ToggleCube()
+    {
+        if (Running)
+        {
+            Stop();
+        }
+        else
+        {
+            Start();
         }
     }
 

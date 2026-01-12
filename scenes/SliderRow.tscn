@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://col458i56005y"]
+
+[ext_resource type="Script" uid="uid://4twuql4s4klo" path="res://scripts/SliderRow.cs" id="1_jb275"]
+
+[node name="SliderRow" type="HBoxContainer"]
+script = ExtResource("1_jb275")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Slider Row"
+
+[node name="Slider" type="HSlider" parent="."]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
