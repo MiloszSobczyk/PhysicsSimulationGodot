@@ -32,7 +32,7 @@ public partial class OrbitalCamera : Camera3D
         _pitch = Mathf.Asin(offset.Y / _distance);
     }
 
-    public override void _Input(InputEvent @event)
+    public override void _UnhandledInput(InputEvent @event)
     {
         if (@event is InputEventMouseMotion motion &&
             Input.IsMouseButtonPressed(MouseButton.Left))
