@@ -35,7 +35,7 @@ public partial class OrbitalCamera : Camera3D
     public override void _UnhandledInput(InputEvent @event)
     {
         if (@event is InputEventMouseMotion motion &&
-            Input.IsMouseButtonPressed(MouseButton.Left))
+            Input.IsActionPressed("DragCamera"))
         {
             _yaw -= motion.Relative.X * RotationSpeed;
 
@@ -46,24 +46,20 @@ public partial class OrbitalCamera : Camera3D
             );
         }
 
-        if (@event is InputEventMouseButton wheel &&
-            wheel.Pressed)
+        if (@event.IsActionPressed("ZoomIn"))
         {
-            if (wheel.ButtonIndex == MouseButton.WheelUp)
-            {
-                _distance -= ZoomSpeed;
-            }
-            else if (wheel.ButtonIndex == MouseButton.WheelDown)
-            {
-                _distance += ZoomSpeed;
-            }
-
-            _distance = Mathf.Clamp(
-                _distance,
-                MinDistance,
-                MaxDistance
-            );
+            _distance -= ZoomSpeed;
         }
+        else if (@event.IsActionPressed("ZoomOut"))
+        {
+            _distance += ZoomSpeed;
+        }
+
+        _distance = Mathf.Clamp(
+            _distance,
+            MinDistance,
+            MaxDistance
+        );
     }
 
     public override void _Process(double delta)
