@@ -83,6 +83,14 @@ public partial class Spinner : Node3D
     private void Reset()
     {
         _params.ResetToDefaults();
+
+        _ui.EdgeLengthSlider.SetValueNoSignal(_params.EdgeLength);
+        _ui.DensitySlider.SetValueNoSignal(_params.Density);
+        _ui.AngularVelocitySlider.SetValueNoSignal(_params.SpinSpeed);
+        _ui.InitialTiltSlider.SetValueNoSignal(_params.InitialTilt);
+        _ui.TraceSizeSlider.SetValueNoSignal(_params.TraceSize);
+        _ui.TimeStepSlider.SetValueNoSignal(_params.TimeStep);
+
         ApplyParameters();
     }
 
@@ -146,6 +154,8 @@ public partial class Spinner : Node3D
 
     private void ApplyParameters()
     {
+        _tracePoints.Clear();
+        _cube.Mass = (float)(_params.Density * System.Math.Pow(_params.EdgeLength, 3));
         ApplyTransform();
 
         if (!Engine.IsEditorHint())
@@ -164,7 +174,13 @@ public partial class Spinner : Node3D
         Vector3 localSpinAxis = new Vector3(1.0f, 1.0f, 1.0f).Normalized();
         Vector3 globalSpinAxis = _cube.GlobalBasis * localSpinAxis;
 
-        _cube.AngularVelocity = globalSpinAxis * (float)_params.SpinSpeed;
+        Vector3 newAngularVelocity = globalSpinAxis * (float)_params.SpinSpeed;
+
+        _cube.AngularVelocity = newAngularVelocity;
+        _params.SavedAngularVelocity = newAngularVelocity;
+
+        _params.SavedLinearVelocity = Vector3.Zero;
+        _cube.LinearVelocity = Vector3.Zero;
     }
 
     private void ApplyTransform()

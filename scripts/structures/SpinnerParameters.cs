@@ -19,7 +19,5 @@ public class SpinnerParameters
         InitialTilt = 0.0f;
         TraceSize = 1000;
         TimeStep = 0.01f;
-        SavedAngularVelocity = Godot.Vector3.Zero;
-        SavedLinearVelocity = Godot.Vector3.Zero;
     }
 }
