@@ -10,9 +10,10 @@ public partial class Spinner : Node3D
     private RigidBody3D _cube;
     private MeshInstance3D _diagonalMeshInstance;
     private MeshInstance3D _traceMeshInstance;
+    private SpinnerUI _ui;
+
     private readonly Queue<Vector3> _tracePoints = new();
     private SpinnerParameters _params = new();
-    private SpinnerUI _ui;
 
     public bool Running { get; private set; } = true;
 
@@ -22,16 +23,9 @@ public partial class Spinner : Node3D
 
         _diagonalMeshInstance = GetNode<MeshInstance3D>("Cube/Diagonal/MeshInstance3D");
         _traceMeshInstance = GetNode<MeshInstance3D>("Trace/MeshInstance3D");
-        GD.Print("Dupa");
 
         SetupUI();
-
-        ApplyTransform();
-
-        if (!Engine.IsEditorHint())
-        {
-            ApplySpin();
-        }
+        ApplyParameters();
     }
 
     public override void _Process(double delta)
@@ -45,6 +39,7 @@ public partial class Spinner : Node3D
             UpdateTrace();
         }
     }
+
     private void Stop()
     {
         if (!Running) return;
@@ -56,6 +51,7 @@ public partial class Spinner : Node3D
 
         Running = false;
     }
+
     private void Start()
     {
         if (Running) return;
@@ -67,6 +63,7 @@ public partial class Spinner : Node3D
 
         Running = true;
     }
+
     private void ToggleCube()
     {
         if (Running)
@@ -80,6 +77,13 @@ public partial class Spinner : Node3D
             Start();
         }
     }
+
+    private void Reset()
+    {
+        _params.ResetToDefaults();
+        ApplyParameters();
+    }
+
     private void SetupUI()
     {
         _ui = GetNode<SpinnerUI>("SpinnerUI");
@@ -87,6 +91,12 @@ public partial class Spinner : Node3D
         _ui.StartStopButton.Pressed += () =>
         {
             ToggleCube();
+        };
+
+        _ui.ResetButton.Pressed += () =>
+        {
+            Reset();
+            ApplyParameters();
         };
 
         _ui.EdgeLengthSlider.SetValueNoSignal(_params.EdgeLength);
@@ -126,6 +136,16 @@ public partial class Spinner : Node3D
         };
     }
 
+    private void ApplyParameters()
+    {
+        ApplyTransform();
+
+        if (!Engine.IsEditorHint())
+        {
+            ApplySpin();
+        }
+    }
+
     private void ApplySpin()
     {
         if (_cube == null) return;
@@ -138,12 +158,13 @@ public partial class Spinner : Node3D
 
         _cube.AngularVelocity = globalSpinAxis * (float)_params.SpinSpeed;
     }
+
     private void ApplyTransform()
     {
         if (_cube == null) return;
 
-        Vector3 localDiagonal = new Vector3(1.0f, 1.0f, 1.0f).Normalized();
-        Quaternion alignQuat = new Quaternion(localDiagonal, Vector3.Up);
+        Vector3 halfEdge = Vector3.One * ((float)_params.EdgeLength * 0.5f);
+        Quaternion alignQuat = new Quaternion(halfEdge.Normalized(), Vector3.Up);
 
         double tiltRadians = Mathf.DegToRad(_params.InitialTilt);
         Quaternion tiltQuat = new Quaternion(Vector3.Right, (float)tiltRadians);
@@ -151,10 +172,13 @@ public partial class Spinner : Node3D
         Quaternion finalRotation = tiltQuat * alignQuat;
         _cube.Quaternion = finalRotation;
 
-        Vector3 bottomCorner = new Vector3(-0.5f, -0.5f, -0.5f);
+        Vector3 bottomCorner = -halfEdge;
         Vector3 currentCornerOffset = finalRotation * bottomCorner;
         _cube.Position = -currentCornerOffset;
+
+        _cube.Scale = new Vector3((float)_params.EdgeLength, (float)_params.EdgeLength, (float)_params.EdgeLength);
     }
+
     private void UpdateTrace()
     {
         if (_traceMeshInstance == null || _cube == null) return;
@@ -189,6 +213,7 @@ public partial class Spinner : Node3D
         mesh.ClearSurfaces();
         mesh.AddSurfaceFromArrays(Mesh.PrimitiveType.LineStrip, surfaceArray);
     }
+
     private void UpdateDiagonal()
     {
         if (_diagonalMeshInstance == null) return;
