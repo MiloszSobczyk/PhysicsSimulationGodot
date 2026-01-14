@@ -15,36 +15,32 @@ public partial class SpinnerUI : CanvasLayer
     public HSlider TraceSizeSlider { get; private set; }
     public HSlider TimeStepSlider { get; private set; }
 
-    private HashSet<Control> alwaysEnabled;
-
     public override void _Ready()
     {
         base._Ready();
 
-        StartStopButton = GetNode<Button>("VBoxContainer/StartStopButton");
-        ResetButton = GetNode<Button>("VBoxContainer/ResetApplyRow/ResetButton");
-        ApplyButton = GetNode<Button>("VBoxContainer/ResetApplyRow/ApplyButton");
+        StartStopButton = GetNode<Button>("TopVBox/StartStopButton");
+        ResetButton = GetNode<Button>("TopVBox/VBoxContainer/ResetApplyRow/ResetButton");
+        ApplyButton = GetNode<Button>("TopVBox/VBoxContainer/ResetApplyRow/ApplyButton");
 
-        EdgeLengthSlider = GetNode<HSlider>("VBoxContainer/EdgeLengthRow/HSlider");
-        DensitySlider = GetNode<HSlider>("VBoxContainer/DensityRow/HSlider");
-        AngularVelocitySlider = GetNode<HSlider>("VBoxContainer/AngularVelocityRow/HSlider");
-        InitialTiltSlider = GetNode<HSlider>("VBoxContainer/InitialTiltRow/HSlider");
-        TraceSizeSlider = GetNode<HSlider>("VBoxContainer/TraceSizeRow/HSlider");
-        TimeStepSlider = GetNode<HSlider>("VBoxContainer/TimestepRow/HSlider");
-
-        alwaysEnabled = new HashSet<Control> { StartStopButton };
+        EdgeLengthSlider = GetNode<HSlider>("TopVBox/VBoxContainer/EdgeLengthRow/HSlider");
+        DensitySlider = GetNode<HSlider>("TopVBox/VBoxContainer/DensityRow/HSlider");
+        AngularVelocitySlider = GetNode<HSlider>("TopVBox/VBoxContainer/AngularVelocityRow/HSlider");
+        InitialTiltSlider = GetNode<HSlider>("TopVBox/VBoxContainer/InitialTiltRow/HSlider");
+        TraceSizeSlider = GetNode<HSlider>("TopVBox/VBoxContainer/TraceSizeRow/HSlider");
+        TimeStepSlider = GetNode<HSlider>("TopVBox/VBoxContainer/TimestepRow/HSlider");
     }
 
     public void ToggleControls(bool enabled)
     {
-        VBoxContainer boxContainer = GetNode<VBoxContainer>("VBoxContainer");
+        VBoxContainer boxContainer = GetNode<VBoxContainer>("TopVBox/VBoxContainer");
         SetBoxEnabled(boxContainer, enabled);
     }
 
     private void SetBoxEnabled(BoxContainer boxContainer, bool enabled)
     {
         SetMouseRecursive(boxContainer, enabled);
-        SetControlsRecursive(boxContainer, enabled, alwaysEnabled);
+        SetControlsRecursive(boxContainer, enabled);
         boxContainer.Modulate = enabled
             ? Colors.White
             : new Color(1f, 1f, 1f, 0.5f);
@@ -65,21 +61,18 @@ public partial class SpinnerUI : CanvasLayer
         }
     }
 
-    private void SetControlsRecursive(Control control, bool enabled, HashSet<Control> skipControls)
+    private void SetControlsRecursive(Control control, bool enabled)
     {
         foreach (Node child in control.GetChildren())
         {
             if (child is Control childControl)
             {
-                if (!skipControls.Contains(childControl))
-                {
-                    if (childControl is BaseButton button)
-                        button.Disabled = !enabled;
-                    else if (childControl is Slider slider)
-                        slider.Editable = enabled;
-                }
+                if (childControl is BaseButton button)
+                    button.Disabled = !enabled;
+                else if (childControl is Slider slider)
+                    slider.Editable = enabled;
 
-                SetControlsRecursive(childControl, enabled, skipControls);
+                SetControlsRecursive(childControl, enabled);
             }
         }
     }

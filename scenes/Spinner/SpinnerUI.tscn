@@ -5,39 +5,42 @@
 [node name="SpinnerUI" type="CanvasLayer"]
 script = ExtResource("1_2mhyi")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="TopVBox" type="VBoxContainer" parent="."]
 offset_right = 40.0
 offset_bottom = 40.0
-alignment = 1
 
-[node name="StartStopButton" type="CheckButton" parent="VBoxContainer"]
+[node name="StartStopButton" type="CheckButton" parent="TopVBox"]
 layout_mode = 2
 size_flags_horizontal = 0
 button_pressed = true
 action_mode = 0
 text = "Running"
 
-[node name="ResetApplyRow" type="HBoxContainer" parent="VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TopVBox"]
+layout_mode = 2
+alignment = 1
+
+[node name="ResetApplyRow" type="HBoxContainer" parent="TopVBox/VBoxContainer"]
 layout_mode = 2
 
-[node name="ResetButton" type="Button" parent="VBoxContainer/ResetApplyRow"]
+[node name="ResetButton" type="Button" parent="TopVBox/VBoxContainer/ResetApplyRow"]
 layout_mode = 2
 disabled = true
 text = "Reset to default"
 
-[node name="ApplyButton" type="Button" parent="VBoxContainer/ResetApplyRow"]
+[node name="ApplyButton" type="Button" parent="TopVBox/VBoxContainer/ResetApplyRow"]
 layout_mode = 2
 disabled = true
 text = "Apply changes"
 
-[node name="EdgeLengthRow" type="HBoxContainer" parent="VBoxContainer"]
+[node name="EdgeLengthRow" type="HBoxContainer" parent="TopVBox/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/EdgeLengthRow"]
+[node name="Label" type="Label" parent="TopVBox/VBoxContainer/EdgeLengthRow"]
 layout_mode = 2
 text = "Edge length"
 
-[node name="HSlider" type="HSlider" parent="VBoxContainer/EdgeLengthRow"]
+[node name="HSlider" type="HSlider" parent="TopVBox/VBoxContainer/EdgeLengthRow"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 min_value = 0.1
@@ -45,14 +48,14 @@ max_value = 5.0
 step = 0.1
 value = 0.1
 
-[node name="DensityRow" type="HBoxContainer" parent="VBoxContainer"]
+[node name="DensityRow" type="HBoxContainer" parent="TopVBox/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/DensityRow"]
+[node name="Label" type="Label" parent="TopVBox/VBoxContainer/DensityRow"]
 layout_mode = 2
 text = "Density"
 
-[node name="HSlider" type="HSlider" parent="VBoxContainer/DensityRow"]
+[node name="HSlider" type="HSlider" parent="TopVBox/VBoxContainer/DensityRow"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 min_value = 0.1
@@ -60,48 +63,48 @@ max_value = 5.0
 step = 0.1
 value = 0.1
 
-[node name="AngularVelocityRow" type="HBoxContainer" parent="VBoxContainer"]
+[node name="AngularVelocityRow" type="HBoxContainer" parent="TopVBox/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/AngularVelocityRow"]
+[node name="Label" type="Label" parent="TopVBox/VBoxContainer/AngularVelocityRow"]
 layout_mode = 2
 text = "Angular velocity"
 
-[node name="HSlider" type="HSlider" parent="VBoxContainer/AngularVelocityRow"]
+[node name="HSlider" type="HSlider" parent="TopVBox/VBoxContainer/AngularVelocityRow"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 
-[node name="InitialTiltRow" type="HBoxContainer" parent="VBoxContainer"]
+[node name="InitialTiltRow" type="HBoxContainer" parent="TopVBox/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/InitialTiltRow"]
+[node name="Label" type="Label" parent="TopVBox/VBoxContainer/InitialTiltRow"]
 layout_mode = 2
 text = "Initial tilt"
 
-[node name="HSlider" type="HSlider" parent="VBoxContainer/InitialTiltRow"]
+[node name="HSlider" type="HSlider" parent="TopVBox/VBoxContainer/InitialTiltRow"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 max_value = 90.0
 
-[node name="TraceSizeRow" type="HBoxContainer" parent="VBoxContainer"]
+[node name="TraceSizeRow" type="HBoxContainer" parent="TopVBox/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/TraceSizeRow"]
+[node name="Label" type="Label" parent="TopVBox/VBoxContainer/TraceSizeRow"]
 layout_mode = 2
 text = "Trace size"
 
-[node name="HSlider" type="HSlider" parent="VBoxContainer/TraceSizeRow"]
+[node name="HSlider" type="HSlider" parent="TopVBox/VBoxContainer/TraceSizeRow"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 max_value = 10000.0
 
-[node name="TimestepRow" type="HBoxContainer" parent="VBoxContainer"]
+[node name="TimestepRow" type="HBoxContainer" parent="TopVBox/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/TimestepRow"]
+[node name="Label" type="Label" parent="TopVBox/VBoxContainer/TimestepRow"]
 layout_mode = 2
 text = "Time step"
 
-[node name="HSlider" type="HSlider" parent="VBoxContainer/TimestepRow"]
+[node name="HSlider" type="HSlider" parent="TopVBox/VBoxContainer/TimestepRow"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2

@@ -32,6 +32,8 @@ public partial class Spinner : Node3D
     {
         base._Process(delta);
 
+        if (!Running) return;
+
         UpdateDiagonal();
 
         if (!Engine.IsEditorHint())
@@ -87,6 +89,7 @@ public partial class Spinner : Node3D
     private void SetupUI()
     {
         _ui = GetNode<SpinnerUI>("SpinnerUI");
+        _ui.ToggleControls(false);
         _ui.StartStopButton.SetPressedNoSignal(Running);
         _ui.StartStopButton.Pressed += () =>
         {
@@ -96,6 +99,11 @@ public partial class Spinner : Node3D
         _ui.ResetButton.Pressed += () =>
         {
             Reset();
+            ApplyParameters();
+        };
+
+        _ui.ApplyButton.Pressed += () =>
+        {
             ApplyParameters();
         };
 
