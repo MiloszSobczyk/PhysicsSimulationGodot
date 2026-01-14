@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://c1bc5llbqd74s"]
+[gd_scene load_steps=7 format=3 uid="uid://c1bc5llbqd74s"]
 
 [ext_resource type="Script" uid="uid://b7flbioqlycao" path="res://scripts/Simulation.cs" id="1_3xw28"]
 [ext_resource type="PackedScene" uid="uid://bloob0cdrwg5i" path="res://scenes/SpinningCube.tscn" id="1_8tluy"]
 [ext_resource type="PackedScene" uid="uid://oqpwoe42pkdt" path="res://scenes/OrbitalCamera.tscn" id="1_xh7lv"]
 [ext_resource type="PackedScene" uid="uid://3sixmllhchmv" path="res://scenes/Floor.tscn" id="4_ea5gu"]
 [ext_resource type="PackedScene" uid="uid://bd3ogr6uyxkoj" path="res://scenes/LightToPoint.tscn" id="5_h3kva"]
+[ext_resource type="PackedScene" uid="uid://c0hjbjiblhgx4" path="res://scenes/Crane/Crane.tscn" id="6_lim1b"]
 
 [node name="Simulation" type="Node3D"]
 script = ExtResource("1_3xw28")
@@ -30,3 +31,6 @@ transform = Transform3D(-0.7071067, -0.40824828, -0.5773502, 0, 0.8164966, -0.57
 
 [node name="LightToPoint4" parent="Lights" instance=ExtResource("5_h3kva")]
 transform = Transform3D(0.7071067, 0.40824828, 0.5773502, 0, 0.8164966, -0.5773502, -0.7071067, 0.40824828, 0.5773502, 3, -3, 3)
+
+[node name="Crane" parent="." instance=ExtResource("6_lim1b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.3115351)

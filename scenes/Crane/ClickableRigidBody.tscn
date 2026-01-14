@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://jukuhd05veut"]
+
+[ext_resource type="Script" uid="uid://cipii0muqp615" path="res://scenes/Crane/ClickableRigidBody.cs" id="1_folr8"]
+
+[node name="Arm" type="RigidBody3D"]
+gravity_scale = 0.0
+script = ExtResource("1_folr8")
+
+[connection signal="input_event" from="." to="." method="HandleInput"]
