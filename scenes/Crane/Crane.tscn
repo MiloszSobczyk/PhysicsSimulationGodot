@@ -107,10 +107,12 @@ mesh = SubResource("CylinderMesh_g0xpn")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Crane/Line/LineSegment1"]
 shape = SubResource("ConvexPolygonShape3D_twqan")
 
-[node name="LineJoint1-2" type="PinJoint3D" parent="Crane/Line"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -12.5)
+[node name="LineJoint1-2" type="SliderJoint3D" parent="Crane/Line"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, -0.5, -12.5)
 node_a = NodePath("../LineSegment1")
 node_b = NodePath("../LineSegment2")
+linear_limit/upper_distance = 0.1
+linear_limit/lower_distance = -0.1
 
 [node name="LineSegment2" type="RigidBody3D" parent="Crane/Line"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.75, -12.5)
@@ -121,10 +123,12 @@ mesh = SubResource("CylinderMesh_g0xpn")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Crane/Line/LineSegment2"]
 shape = SubResource("ConvexPolygonShape3D_twqan")
 
-[node name="LineJoint2-3" type="PinJoint3D" parent="Crane/Line"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -12.5)
+[node name="LineJoint2-3" type="SliderJoint3D" parent="Crane/Line"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, -1, -12.5)
 node_a = NodePath("../LineSegment2")
 node_b = NodePath("../LineSegment3")
+linear_limit/upper_distance = 0.1
+linear_limit/lower_distance = -0.1
 
 [node name="LineSegment3" type="RigidBody3D" parent="Crane/Line"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.25, -12.5)
@@ -135,10 +139,12 @@ mesh = SubResource("CylinderMesh_g0xpn")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Crane/Line/LineSegment3"]
 shape = SubResource("ConvexPolygonShape3D_twqan")
 
-[node name="LineJoint3-4" type="PinJoint3D" parent="Crane/Line"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, -12.5)
+[node name="LineJoint3-4" type="SliderJoint3D" parent="Crane/Line"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, -1.5, -12.5)
 node_a = NodePath("../LineSegment3")
 node_b = NodePath("../LineSegment4")
+linear_limit/upper_distance = 0.1
+linear_limit/lower_distance = -0.1
 
 [node name="LineSegment4" type="RigidBody3D" parent="Crane/Line"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.75, -12.5)
@@ -150,10 +156,12 @@ skeleton = NodePath("../../LineSegment3")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Crane/Line/LineSegment4"]
 shape = SubResource("ConvexPolygonShape3D_twqan")
 
-[node name="LineJoint4-5" type="PinJoint3D" parent="Crane/Line"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, -12.5)
+[node name="LineJoint4-5" type="SliderJoint3D" parent="Crane/Line"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, -2, -12.5)
 node_a = NodePath("../LineSegment4")
 node_b = NodePath("../LineSegment5")
+linear_limit/upper_distance = 0.1
+linear_limit/lower_distance = -0.1
 
 [node name="LineSegment5" type="RigidBody3D" parent="Crane/Line"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.25, -12.5)
@@ -165,10 +173,12 @@ skeleton = NodePath("../../LineSegment3")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Crane/Line/LineSegment5"]
 shape = SubResource("ConvexPolygonShape3D_twqan")
 
-[node name="LineJoint5-6" type="PinJoint3D" parent="Crane/Line"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, -12.5)
+[node name="LineJoint5-6" type="SliderJoint3D" parent="Crane/Line"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, -2.5, -12.5)
 node_a = NodePath("../LineSegment5")
 node_b = NodePath("../LineSegment6")
+linear_limit/upper_distance = 0.1
+linear_limit/lower_distance = -0.1
 
 [node name="LineSegment6" type="RigidBody3D" parent="Crane/Line"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.75, -12.5)
@@ -180,10 +190,12 @@ skeleton = NodePath("../../LineSegment3")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Crane/Line/LineSegment6"]
 shape = SubResource("ConvexPolygonShape3D_twqan")
 
-[node name="LineJoint6-7" type="PinJoint3D" parent="Crane/Line"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, -12.5)
+[node name="LineJoint6-7" type="SliderJoint3D" parent="Crane/Line"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, -3, -12.5)
 node_a = NodePath("../LineSegment6")
 node_b = NodePath("../LineSegment7")
+linear_limit/upper_distance = 0.1
+linear_limit/lower_distance = -0.1
 
 [node name="LineSegment7" type="RigidBody3D" parent="Crane/Line"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.25, -12.5)
@@ -195,10 +207,12 @@ skeleton = NodePath("../../LineSegment2")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Crane/Line/LineSegment7"]
 shape = SubResource("ConvexPolygonShape3D_twqan")
 
-[node name="LineJoint7-8" type="PinJoint3D" parent="Crane/Line"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.5, -12.5)
+[node name="LineJoint7-8" type="SliderJoint3D" parent="Crane/Line"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, -3.5, -12.5)
 node_a = NodePath("../LineSegment7")
 node_b = NodePath("../LineSegment8")
+linear_limit/upper_distance = 0.1
+linear_limit/lower_distance = -0.1
 
 [node name="LineSegment8" type="RigidBody3D" parent="Crane/Line"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.75, -12.5)
@@ -209,10 +223,12 @@ mesh = SubResource("CylinderMesh_g0xpn")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Crane/Line/LineSegment8"]
 shape = SubResource("ConvexPolygonShape3D_twqan")
 
-[node name="LineJoint8-9" type="PinJoint3D" parent="Crane/Line"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, -12.5)
+[node name="LineJoint8-9" type="SliderJoint3D" parent="Crane/Line"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, -4, -12.5)
 node_a = NodePath("../LineSegment8")
 node_b = NodePath("../LineSegment9")
+linear_limit/upper_distance = 0.1
+linear_limit/lower_distance = -0.1
 
 [node name="LineSegment9" type="RigidBody3D" parent="Crane/Line"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.25, -12.5)
@@ -224,10 +240,12 @@ skeleton = NodePath("../../LineSegment2")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Crane/Line/LineSegment9"]
 shape = SubResource("ConvexPolygonShape3D_twqan")
 
-[node name="LineJoint9-10" type="PinJoint3D" parent="Crane/Line"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.5, -12.5)
+[node name="LineJoint9-10" type="SliderJoint3D" parent="Crane/Line"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, -4.5, -12.5)
 node_a = NodePath("../LineSegment9")
 node_b = NodePath("../LineSegment10")
+linear_limit/upper_distance = 0.1
+linear_limit/lower_distance = -0.1
 
 [node name="LineSegment10" type="RigidBody3D" parent="Crane/Line"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.75, -12.5)
@@ -238,10 +256,12 @@ mesh = SubResource("CylinderMesh_g0xpn")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Crane/Line/LineSegment10"]
 shape = SubResource("ConvexPolygonShape3D_twqan")
 
-[node name="LineBallJohn" type="PinJoint3D" parent="Crane"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.75, -12.5)
+[node name="LineBallJohn" type="SliderJoint3D" parent="Crane"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 5.75, -12.5)
 node_a = NodePath("../Ball")
 node_b = NodePath("../Line/LineSegment10")
+linear_limit/upper_distance = 0.1
+linear_limit/lower_distance = -0.1
 
 [node name="Ball" type="RigidBody3D" parent="Crane"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -12.5)
