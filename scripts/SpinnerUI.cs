@@ -86,6 +86,8 @@ public partial class SpinnerUI : CanvasLayer
                     button.Disabled = !enabled;
                 else if (childControl is Slider slider)
                     slider.Editable = enabled;
+                else if (childControl is SpinBox spinBox)
+                    spinBox.Editable = enabled;
 
                 SetControlsRecursive(childControl, enabled);
             }
