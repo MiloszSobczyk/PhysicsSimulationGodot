@@ -37,6 +37,7 @@ public partial class ClickableRigidBody : RigidBody3D
 
     public void HandleInput(Camera3D camera, InputEvent @event, Vector3 position, Vector3 normal, int shapeIndex)
 	{
+        GD.Print("heh");
 		if (Input.IsActionPressed("AddImpulse"))
 		{
 			Vector3 dir = -normal;
