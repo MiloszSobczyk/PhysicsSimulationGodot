@@ -62,9 +62,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.75, 0)
 node_a = NodePath("../Arm")
 node_b = NodePath("../Beam")
 
-[node name="Arm" parent="." instance=ExtResource("1_xqtam")]
+[node name="Arm" parent="." node_paths=PackedStringArray("PinJointNode") instance=ExtResource("1_xqtam")]
 axis_lock_angular_x = true
 axis_lock_angular_z = true
+mass = 100.0
+PinJointNode = NodePath("../BeamArmJoint")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Arm"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11, -4)
@@ -230,6 +232,7 @@ node_b = NodePath("../Line/LineSegment10")
 
 [node name="Ball" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -12.5)
+mass = 5.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ball"]
 mesh = SubResource("SphereMesh_g0xpn")

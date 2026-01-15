@@ -19,7 +19,6 @@ fov = 90.0
 
 [node name="Crane" parent="." instance=ExtResource("6_lim1b")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.555, 0, 2.312)
-visible = false
 
 [node name="Floor" parent="." instance=ExtResource("4_ea5gu")]
 
