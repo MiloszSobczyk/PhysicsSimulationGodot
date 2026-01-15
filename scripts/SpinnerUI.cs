@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
-public partial class SpinnerUI : CanvasLayer
+public partial class SpinnerUI : Control
 {
     public Button StartStopButton { get; private set; }
     public Button ResetButton { get; private set; }

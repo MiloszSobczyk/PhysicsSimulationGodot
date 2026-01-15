@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://bin2ewg4b6kjj"]
+
+[node name="SimulationUI" type="CanvasLayer"]
+
+[node name="ViewSwitcher" type="CheckButton" parent="."]
+offset_left = 1045.0
+offset_right = 1153.0
+offset_bottom = 31.0
+text = "Spinner"

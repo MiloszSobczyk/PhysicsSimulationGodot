@@ -2,10 +2,13 @@
 
 [ext_resource type="Script" uid="uid://dgbylrkjulwlf" path="res://scripts/SpinnerUI.cs" id="1_2mhyi"]
 
-[node name="SpinnerUI" type="CanvasLayer"]
+[node name="SpinnerUI" type="Control"]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_2mhyi")
 
 [node name="TopVBox" type="VBoxContainer" parent="."]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
