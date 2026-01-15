@@ -252,7 +252,7 @@ mesh = SubResource("SphereMesh_g0xpn")
 shape = SubResource("ConvexPolygonShape3D_c44c8")
 
 [node name="Doors" type="Node3D" parent="."]
-transform = Transform3D(-4.3711385e-08, 0, -0.99999994, 0, 1, 0, 0.99999994, 0, -4.3711385e-08, 15, 0, 0)
+transform = Transform3D(-4.3711385e-08, 0, -0.99999994, 0, 1, 0, 0.99999994, 0, -4.3711385e-08, 10.534073, 0, 0)
 
 [node name="Left" type="Node3D" parent="Doors"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)
