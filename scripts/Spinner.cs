@@ -42,6 +42,18 @@ public partial class Spinner : Node3D
             UpdateTrace();
         }
     }
+    private void ApplyTimeStep()
+    {
+        if (_params.TimeStep <= 0.0)
+        {
+            return;
+        }
+
+        int ticksPerSecond = Mathf.RoundToInt((float)(1.0 / _params.TimeStep));
+        ticksPerSecond = Mathf.Clamp(ticksPerSecond, 1, 1000);
+
+        Engine.PhysicsTicksPerSecond = ticksPerSecond;
+    }
 
     private void Stop()
     {
@@ -198,6 +210,9 @@ public partial class Spinner : Node3D
     private void ApplyParameters()
     {
         _tracePoints.Clear();
+
+        ApplyTimeStep();
+
         _cube.Mass = (float)(_params.Density * System.Math.Pow(_params.EdgeLength, 3));
         ApplyTransform();
 
