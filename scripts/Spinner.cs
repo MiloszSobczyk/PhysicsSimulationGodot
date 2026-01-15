@@ -1,5 +1,6 @@
 using Godot;
 using PhysicsSimulationGodot.scripts.structures;
+using System;
 using System.Collections.Generic;
 
 namespace PhysicsSimulationGodot.scripts;
@@ -98,6 +99,7 @@ public partial class Spinner : Node3D
     {
         _ui = GetNode<SpinnerUI>("SpinnerUI");
         _ui.ToggleControls(false);
+
         _ui.StartStopButton.SetPressedNoSignal(Running);
         _ui.StartStopButton.Pressed += () =>
         {
@@ -115,40 +117,81 @@ public partial class Spinner : Node3D
             ApplyParameters();
         };
 
-        _ui.EdgeLengthSlider.SetValueNoSignal(_params.EdgeLength);
-        _ui.EdgeLengthSlider.ValueChanged += (value) =>
+        BindSliderAndSpinBox(
+            _ui.EdgeLengthSlider,
+            _ui.EdgeLengthSpinBox,
+            _params.EdgeLength,
+            value =>
+            {
+                _params.EdgeLength = value;
+            }
+        );
+
+        BindSliderAndSpinBox(
+            _ui.DensitySlider,
+            _ui.DensitySpinBox,
+            _params.Density,
+            value =>
+            {
+                _params.Density = value;
+            }
+        );
+
+        BindSliderAndSpinBox(
+            _ui.AngularVelocitySlider,
+            _ui.AngularVelocitySpinBox,
+            _params.SpinSpeed,
+            value =>
+            {
+                _params.SpinSpeed = value;
+            }
+        );
+
+        BindSliderAndSpinBox(
+            _ui.InitialTiltSlider,
+            _ui.InitialTiltSpinBox,
+            _params.InitialTilt,
+            value =>
+            {
+                _params.InitialTilt = value;
+            }
+        );
+
+        BindSliderAndSpinBox(
+            _ui.TraceSizeSlider,
+            _ui.TraceSizeSpinBox,
+            _params.TraceSize,
+            value =>
+            {
+                _params.TraceSize = (int)value;
+            }
+        );
+
+        BindSliderAndSpinBox(
+            _ui.TimeStepSlider,
+            _ui.TimeStepSpinBox,
+            _params.TimeStep,
+            value =>
+            {
+                _params.TimeStep = value;
+            }
+        );
+    }
+    private void BindSliderAndSpinBox(Slider slider, SpinBox spinBox, double initialValue, Action<double> setter)
+    {
+        slider.SetValueNoSignal(initialValue);
+        spinBox.SetValueNoSignal(initialValue);
+
+        slider.ValueChanged += (value) =>
         {
-            _params.EdgeLength = value;
+            setter(value);
+            spinBox.SetValueNoSignal(value);
         };
 
-        _ui.DensitySlider.SetValueNoSignal(_params.Density);
-        _ui.DensitySlider.ValueChanged += (value) =>
+        spinBox.ValueChanged += (value) =>
         {
-            _params.Density = value;
-        };
-
-        _ui.AngularVelocitySlider.SetValueNoSignal(_params.SpinSpeed);
-        _ui.AngularVelocitySlider.ValueChanged += (value) =>
-        {
-            _params.SpinSpeed = value;
-        };
-
-        _ui.InitialTiltSlider.SetValueNoSignal(_params.InitialTilt);
-        _ui.InitialTiltSlider.ValueChanged += (value) =>
-        {
-            _params.InitialTilt = value;
-        };
-
-        _ui.TraceSizeSlider.SetValueNoSignal(_params.TraceSize);
-        _ui.TraceSizeSlider.ValueChanged += (value) =>
-        {
-            _params.TraceSize = (int)value;
-        };
-
-        _ui.TimeStepSlider.SetValueNoSignal(_params.TimeStep);
-        _ui.TimeStepSlider.ValueChanged += (value) =>
-        {
-            _params.TimeStep = value;
+            setter(value);
+            slider.SetValueNoSignal(value);
         };
     }
 

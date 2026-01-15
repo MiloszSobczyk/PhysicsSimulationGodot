@@ -15,6 +15,14 @@ public partial class SpinnerUI : CanvasLayer
     public HSlider TraceSizeSlider { get; private set; }
     public HSlider TimeStepSlider { get; private set; }
 
+    public SpinBox EdgeLengthSpinBox { get; private set; }
+    public SpinBox DensitySpinBox { get; private set; }
+    public SpinBox AngularVelocitySpinBox { get; private set; }
+    public SpinBox InitialTiltSpinBox { get; private set; }
+    public SpinBox TraceSizeSpinBox { get; private set; }
+    public SpinBox TimeStepSpinBox { get; private set; }
+
+
     public override void _Ready()
     {
         base._Ready();
@@ -29,6 +37,13 @@ public partial class SpinnerUI : CanvasLayer
         InitialTiltSlider = GetNode<HSlider>("TopVBox/VBoxContainer/InitialTiltRow/HSlider");
         TraceSizeSlider = GetNode<HSlider>("TopVBox/VBoxContainer/TraceSizeRow/HSlider");
         TimeStepSlider = GetNode<HSlider>("TopVBox/VBoxContainer/TimestepRow/HSlider");
+
+        EdgeLengthSpinBox = GetNode<SpinBox>("TopVBox/VBoxContainer/EdgeLengthRow/SpinBox");
+        DensitySpinBox = GetNode<SpinBox>("TopVBox/VBoxContainer/DensityRow/SpinBox");
+        AngularVelocitySpinBox = GetNode<SpinBox>("TopVBox/VBoxContainer/AngularVelocityRow/SpinBox");
+        InitialTiltSpinBox = GetNode<SpinBox>("TopVBox/VBoxContainer/InitialTiltRow/SpinBox");
+        TraceSizeSpinBox = GetNode<SpinBox>("TopVBox/VBoxContainer/TraceSizeRow/SpinBox");
+        TimeStepSpinBox = GetNode<SpinBox>("TopVBox/VBoxContainer/TimestepRow/SpinBox");
     }
 
     public void ToggleControls(bool enabled)

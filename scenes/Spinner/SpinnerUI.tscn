@@ -37,74 +37,134 @@ text = "Apply changes"
 layout_mode = 2
 
 [node name="Label" type="Label" parent="TopVBox/VBoxContainer/EdgeLengthRow"]
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
-text = "Edge length"
+text = " Edge length"
 
 [node name="HSlider" type="HSlider" parent="TopVBox/VBoxContainer/EdgeLengthRow"]
-custom_minimum_size = Vector2(100, 0)
+custom_minimum_size = Vector2(100, 30)
 layout_mode = 2
 min_value = 0.1
 max_value = 5.0
 step = 0.1
 value = 0.1
+
+[node name="SpinBox" type="SpinBox" parent="TopVBox/VBoxContainer/EdgeLengthRow"]
+custom_minimum_size = Vector2(125, 0)
+layout_mode = 2
+min_value = 0.1
+max_value = 5.0
+step = 0.1
+value = 1.0
+suffix = "m"
 
 [node name="DensityRow" type="HBoxContainer" parent="TopVBox/VBoxContainer"]
 layout_mode = 2
 
 [node name="Label" type="Label" parent="TopVBox/VBoxContainer/DensityRow"]
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
-text = "Density"
+text = " Density"
 
 [node name="HSlider" type="HSlider" parent="TopVBox/VBoxContainer/DensityRow"]
-custom_minimum_size = Vector2(100, 0)
+custom_minimum_size = Vector2(100, 30)
 layout_mode = 2
 min_value = 0.1
 max_value = 5.0
 step = 0.1
 value = 0.1
 
+[node name="SpinBox" type="SpinBox" parent="TopVBox/VBoxContainer/DensityRow"]
+custom_minimum_size = Vector2(125, 0)
+layout_mode = 2
+min_value = 0.1
+max_value = 5.0
+step = 0.1
+value = 1.0
+suffix = "kg/m^3"
+
 [node name="AngularVelocityRow" type="HBoxContainer" parent="TopVBox/VBoxContainer"]
 layout_mode = 2
 
 [node name="Label" type="Label" parent="TopVBox/VBoxContainer/AngularVelocityRow"]
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
-text = "Angular velocity"
+text = " Angular velocity"
 
 [node name="HSlider" type="HSlider" parent="TopVBox/VBoxContainer/AngularVelocityRow"]
-custom_minimum_size = Vector2(100, 0)
+custom_minimum_size = Vector2(100, 30)
 layout_mode = 2
+
+[node name="SpinBox" type="SpinBox" parent="TopVBox/VBoxContainer/AngularVelocityRow"]
+custom_minimum_size = Vector2(125, 0)
+layout_mode = 2
+suffix = "rad/s"
 
 [node name="InitialTiltRow" type="HBoxContainer" parent="TopVBox/VBoxContainer"]
 layout_mode = 2
 
 [node name="Label" type="Label" parent="TopVBox/VBoxContainer/InitialTiltRow"]
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
-text = "Initial tilt"
+text = " Initial tilt"
 
 [node name="HSlider" type="HSlider" parent="TopVBox/VBoxContainer/InitialTiltRow"]
-custom_minimum_size = Vector2(100, 0)
+custom_minimum_size = Vector2(100, 30)
 layout_mode = 2
 max_value = 90.0
+
+[node name="SpinBox" type="SpinBox" parent="TopVBox/VBoxContainer/InitialTiltRow"]
+custom_minimum_size = Vector2(125, 0)
+layout_mode = 2
+max_value = 90.0
+suffix = "°"
 
 [node name="TraceSizeRow" type="HBoxContainer" parent="TopVBox/VBoxContainer"]
 layout_mode = 2
 
 [node name="Label" type="Label" parent="TopVBox/VBoxContainer/TraceSizeRow"]
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
-text = "Trace size"
+text = " Trace size"
 
 [node name="HSlider" type="HSlider" parent="TopVBox/VBoxContainer/TraceSizeRow"]
-custom_minimum_size = Vector2(100, 0)
+custom_minimum_size = Vector2(100, 30)
 layout_mode = 2
 max_value = 10000.0
+step = 100.0
+value = 1000.0
+rounded = true
+
+[node name="SpinBox" type="SpinBox" parent="TopVBox/VBoxContainer/TraceSizeRow"]
+custom_minimum_size = Vector2(125, 0)
+layout_mode = 2
+max_value = 10000.0
+step = 100.0
+value = 100.0
+rounded = true
 
 [node name="TimestepRow" type="HBoxContainer" parent="TopVBox/VBoxContainer"]
 layout_mode = 2
 
 [node name="Label" type="Label" parent="TopVBox/VBoxContainer/TimestepRow"]
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
-text = "Time step"
+text = " Time step"
 
 [node name="HSlider" type="HSlider" parent="TopVBox/VBoxContainer/TimestepRow"]
-custom_minimum_size = Vector2(100, 0)
+custom_minimum_size = Vector2(100, 30)
 layout_mode = 2
+min_value = 0.001
+max_value = 0.1
+step = 0.001
+value = 0.009999999999999998
+exp_edit = true
+
+[node name="SpinBox" type="SpinBox" parent="TopVBox/VBoxContainer/TimestepRow"]
+custom_minimum_size = Vector2(125, 0)
+layout_mode = 2
+min_value = 0.001
+max_value = 0.1
+step = 0.001
+value = 0.009999999999999998
+suffix = "s"
