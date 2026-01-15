@@ -3,5 +3,5 @@
 [ext_resource type="Script" uid="uid://bfsaq84o3fcho" path="res://scripts/OrbitalCamera.cs" id="1_5vowy"]
 
 [node name="OrbitalCamera" type="Camera3D"]
-transform = Transform3D(nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan)
+transform = Transform3D(nan, nan, nan, nan, nan, nan, nan, nan, nan, 0, 0, 0)
 script = ExtResource("1_5vowy")

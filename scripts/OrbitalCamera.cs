@@ -1,8 +1,6 @@
 using Godot;
 
-namespace PhysicsSimulationGodot.scripts;
-
-[Tool]
+[GlobalClass]
 public partial class OrbitalCamera : Camera3D
 {
     [Export]
@@ -17,60 +15,69 @@ public partial class OrbitalCamera : Camera3D
     [Export]
     public float MaxDistance = 15.0f;
 
-    private float _yaw;
-    private float _pitch;
-    private float _distance;
+    [Export]
+    public Node3D Target;
 
-    private readonly Vector3 _target = Vector3.Zero;
+    private float _currentRotationX = 0f;
+    private float _currentRotationY = 0f;
+    private float _currentDistance = 5f;
 
     public override void _Ready()
     {
-        Vector3 offset = GlobalPosition - _target;
-        _distance = offset.Length();
+        if (Target != null)
+        {
+            _currentDistance = GlobalPosition.DistanceTo(Target.GlobalPosition);
+            LookAt(Target.GlobalPosition);
+        }
 
-        _yaw = Mathf.Atan2(offset.X, offset.Z);
-        _pitch = Mathf.Asin(offset.Y / _distance);
+        Vector3 currentRot = Rotation;
+        _currentRotationX = currentRot.Y;
+        _currentRotationY = currentRot.X;
+
+        _currentDistance = Mathf.Clamp(_currentDistance, MinDistance, MaxDistance);
     }
 
     public override void _UnhandledInput(InputEvent @event)
     {
-        if (@event is InputEventMouseMotion motion &&
-            Input.IsActionPressed("DragCamera"))
+        if (@event is InputEventMouseMotion mouseMotion)
         {
-            _yaw -= motion.Relative.X * RotationSpeed;
-
-            _pitch = Mathf.Clamp(
-                _pitch + motion.Relative.Y * RotationSpeed,
-                -1.3f,
-                1.3f
-            );
+            if (Input.IsActionPressed("DragCamera"))
+            {
+                _currentRotationX -= mouseMotion.Relative.X * RotationSpeed;
+                _currentRotationY -= mouseMotion.Relative.Y * RotationSpeed;
+                _currentRotationY = Mathf.Clamp(_currentRotationY, -Mathf.Pi / 2.0f + 0.1f, Mathf.Pi / 2.0f - 0.1f);
+            }
         }
 
         if (@event.IsActionPressed("ZoomIn"))
         {
-            _distance -= ZoomSpeed;
+            _currentDistance -= ZoomSpeed;
+            _currentDistance = Mathf.Clamp(_currentDistance, MinDistance, MaxDistance);
         }
         else if (@event.IsActionPressed("ZoomOut"))
         {
-            _distance += ZoomSpeed;
+            _currentDistance += ZoomSpeed;
+            _currentDistance = Mathf.Clamp(_currentDistance, MinDistance, MaxDistance);
         }
-
-        _distance = Mathf.Clamp(
-            _distance,
-            MinDistance,
-            MaxDistance
-        );
     }
 
     public override void _Process(double delta)
     {
-        Vector3 position = new Vector3(
-            _distance * Mathf.Cos(_pitch) * Mathf.Sin(_yaw),
-            _distance * Mathf.Sin(_pitch),
-            _distance * Mathf.Cos(_pitch) * Mathf.Cos(_yaw)
-        );
+        UpdateCameraTransform();
+    }
 
-        GlobalPosition = _target + position;
-        LookAt(_target, Vector3.Up);
+    private void UpdateCameraTransform()
+    {
+        Vector3 targetPosition = Vector3.Zero;
+        if (Target != null)
+        {
+            targetPosition = Target.GlobalPosition;
+        }
+
+        Quaternion rotation = Quaternion.FromEuler(new Vector3(_currentRotationY, _currentRotationX, 0));
+        Vector3 offset = rotation * Vector3.Back * _currentDistance;
+        GlobalPosition = targetPosition + offset;
+
+        LookAt(targetPosition);
     }
 }
