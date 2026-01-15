@@ -49,206 +49,208 @@ points = PackedVector3Array(4.5, 2.5, 0.25, 4.5, 2.5, -0.25, -4.5, 2.5, 0.25, 4.
 
 [node name="Crane" type="Node3D"]
 
-[node name="Root" type="StaticBody3D" parent="."]
+[node name="Crane" type="Node3D" parent="."]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Root"]
+[node name="Root" type="StaticBody3D" parent="Crane"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Crane/Root"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 mesh = SubResource("BoxMesh_vuy1j")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Root"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Crane/Root"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("ConvexPolygonShape3D_vuy1j")
 
-[node name="Beam" type="StaticBody3D" parent="."]
+[node name="Beam" type="StaticBody3D" parent="Crane"]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Beam"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Crane/Beam"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
 mesh = SubResource("CylinderMesh_vuy1j")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Beam"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Crane/Beam"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
 shape = SubResource("ConvexPolygonShape3D_g0xpn")
 
-[node name="BeamArmJoint" type="PinJoint3D" parent="."]
+[node name="BeamArmJoint" type="PinJoint3D" parent="Crane"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.75, 0)
 node_a = NodePath("../Arm")
 node_b = NodePath("../Beam")
 
-[node name="Arm" parent="." instance=ExtResource("1_xqtam")]
+[node name="Arm" parent="Crane" instance=ExtResource("1_xqtam")]
 axis_lock_angular_x = true
 axis_lock_angular_z = true
 mass = 100.0
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Arm"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Crane/Arm"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11, -4)
 mesh = SubResource("BoxMesh_g0xpn")
 skeleton = NodePath("")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Arm"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Crane/Arm"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11, -4)
 shape = SubResource("ConvexPolygonShape3D_ty3w4")
 
-[node name="ArmLineJoint" type="PinJoint3D" parent="."]
+[node name="ArmLineJoint" type="PinJoint3D" parent="Crane"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.75, -12.5)
 node_a = NodePath("../Arm")
 node_b = NodePath("../Line/LineSegment1")
 
-[node name="Line" type="Node3D" parent="."]
+[node name="Line" type="Node3D" parent="Crane"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.75, 0)
 
-[node name="LineSegment1" type="RigidBody3D" parent="Line"]
+[node name="LineSegment1" type="RigidBody3D" parent="Crane/Line"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, -12.5)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Line/LineSegment1"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Crane/Line/LineSegment1"]
 mesh = SubResource("CylinderMesh_g0xpn")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Line/LineSegment1"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Crane/Line/LineSegment1"]
 shape = SubResource("ConvexPolygonShape3D_twqan")
 
-[node name="LineJoint1-2" type="PinJoint3D" parent="Line"]
+[node name="LineJoint1-2" type="PinJoint3D" parent="Crane/Line"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -12.5)
 node_a = NodePath("../LineSegment1")
 node_b = NodePath("../LineSegment2")
 
-[node name="LineSegment2" type="RigidBody3D" parent="Line"]
+[node name="LineSegment2" type="RigidBody3D" parent="Crane/Line"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.75, -12.5)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Line/LineSegment2"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Crane/Line/LineSegment2"]
 mesh = SubResource("CylinderMesh_g0xpn")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Line/LineSegment2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Crane/Line/LineSegment2"]
 shape = SubResource("ConvexPolygonShape3D_twqan")
 
-[node name="LineJoint2-3" type="PinJoint3D" parent="Line"]
+[node name="LineJoint2-3" type="PinJoint3D" parent="Crane/Line"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -12.5)
 node_a = NodePath("../LineSegment2")
 node_b = NodePath("../LineSegment3")
 
-[node name="LineSegment3" type="RigidBody3D" parent="Line"]
+[node name="LineSegment3" type="RigidBody3D" parent="Crane/Line"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.25, -12.5)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Line/LineSegment3"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Crane/Line/LineSegment3"]
 mesh = SubResource("CylinderMesh_g0xpn")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Line/LineSegment3"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Crane/Line/LineSegment3"]
 shape = SubResource("ConvexPolygonShape3D_twqan")
 
-[node name="LineJoint3-4" type="PinJoint3D" parent="Line"]
+[node name="LineJoint3-4" type="PinJoint3D" parent="Crane/Line"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, -12.5)
 node_a = NodePath("../LineSegment3")
 node_b = NodePath("../LineSegment4")
 
-[node name="LineSegment4" type="RigidBody3D" parent="Line"]
+[node name="LineSegment4" type="RigidBody3D" parent="Crane/Line"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.75, -12.5)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Line/LineSegment4"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Crane/Line/LineSegment4"]
 mesh = SubResource("CylinderMesh_g0xpn")
 skeleton = NodePath("../../LineSegment3")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Line/LineSegment4"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Crane/Line/LineSegment4"]
 shape = SubResource("ConvexPolygonShape3D_twqan")
 
-[node name="LineJoint4-5" type="PinJoint3D" parent="Line"]
+[node name="LineJoint4-5" type="PinJoint3D" parent="Crane/Line"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, -12.5)
 node_a = NodePath("../LineSegment4")
 node_b = NodePath("../LineSegment5")
 
-[node name="LineSegment5" type="RigidBody3D" parent="Line"]
+[node name="LineSegment5" type="RigidBody3D" parent="Crane/Line"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.25, -12.5)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Line/LineSegment5"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Crane/Line/LineSegment5"]
 mesh = SubResource("CylinderMesh_g0xpn")
 skeleton = NodePath("../../LineSegment3")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Line/LineSegment5"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Crane/Line/LineSegment5"]
 shape = SubResource("ConvexPolygonShape3D_twqan")
 
-[node name="LineJoint5-6" type="PinJoint3D" parent="Line"]
+[node name="LineJoint5-6" type="PinJoint3D" parent="Crane/Line"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, -12.5)
 node_a = NodePath("../LineSegment5")
 node_b = NodePath("../LineSegment6")
 
-[node name="LineSegment6" type="RigidBody3D" parent="Line"]
+[node name="LineSegment6" type="RigidBody3D" parent="Crane/Line"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.75, -12.5)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Line/LineSegment6"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Crane/Line/LineSegment6"]
 mesh = SubResource("CylinderMesh_g0xpn")
 skeleton = NodePath("../../LineSegment3")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Line/LineSegment6"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Crane/Line/LineSegment6"]
 shape = SubResource("ConvexPolygonShape3D_twqan")
 
-[node name="LineJoint6-7" type="PinJoint3D" parent="Line"]
+[node name="LineJoint6-7" type="PinJoint3D" parent="Crane/Line"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, -12.5)
 node_a = NodePath("../LineSegment6")
 node_b = NodePath("../LineSegment7")
 
-[node name="LineSegment7" type="RigidBody3D" parent="Line"]
+[node name="LineSegment7" type="RigidBody3D" parent="Crane/Line"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.25, -12.5)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Line/LineSegment7"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Crane/Line/LineSegment7"]
 mesh = SubResource("CylinderMesh_g0xpn")
 skeleton = NodePath("../../LineSegment2")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Line/LineSegment7"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Crane/Line/LineSegment7"]
 shape = SubResource("ConvexPolygonShape3D_twqan")
 
-[node name="LineJoint7-8" type="PinJoint3D" parent="Line"]
+[node name="LineJoint7-8" type="PinJoint3D" parent="Crane/Line"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.5, -12.5)
 node_a = NodePath("../LineSegment7")
 node_b = NodePath("../LineSegment8")
 
-[node name="LineSegment8" type="RigidBody3D" parent="Line"]
+[node name="LineSegment8" type="RigidBody3D" parent="Crane/Line"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.75, -12.5)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Line/LineSegment8"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Crane/Line/LineSegment8"]
 mesh = SubResource("CylinderMesh_g0xpn")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Line/LineSegment8"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Crane/Line/LineSegment8"]
 shape = SubResource("ConvexPolygonShape3D_twqan")
 
-[node name="LineJoint8-9" type="PinJoint3D" parent="Line"]
+[node name="LineJoint8-9" type="PinJoint3D" parent="Crane/Line"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, -12.5)
 node_a = NodePath("../LineSegment8")
 node_b = NodePath("../LineSegment9")
 
-[node name="LineSegment9" type="RigidBody3D" parent="Line"]
+[node name="LineSegment9" type="RigidBody3D" parent="Crane/Line"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.25, -12.5)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Line/LineSegment9"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Crane/Line/LineSegment9"]
 mesh = SubResource("CylinderMesh_g0xpn")
 skeleton = NodePath("../../LineSegment2")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Line/LineSegment9"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Crane/Line/LineSegment9"]
 shape = SubResource("ConvexPolygonShape3D_twqan")
 
-[node name="LineJoint9-10" type="PinJoint3D" parent="Line"]
+[node name="LineJoint9-10" type="PinJoint3D" parent="Crane/Line"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.5, -12.5)
 node_a = NodePath("../LineSegment9")
 node_b = NodePath("../LineSegment10")
 
-[node name="LineSegment10" type="RigidBody3D" parent="Line"]
+[node name="LineSegment10" type="RigidBody3D" parent="Crane/Line"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.75, -12.5)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Line/LineSegment10"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Crane/Line/LineSegment10"]
 mesh = SubResource("CylinderMesh_g0xpn")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Line/LineSegment10"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Crane/Line/LineSegment10"]
 shape = SubResource("ConvexPolygonShape3D_twqan")
 
-[node name="LineBallJohn" type="PinJoint3D" parent="."]
+[node name="LineBallJohn" type="PinJoint3D" parent="Crane"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.75, -12.5)
 node_a = NodePath("../Ball")
 node_b = NodePath("../Line/LineSegment10")
 
-[node name="Ball" type="RigidBody3D" parent="."]
+[node name="Ball" type="RigidBody3D" parent="Crane"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -12.5)
 mass = 5.0
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Ball"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Crane/Ball"]
 mesh = SubResource("SphereMesh_g0xpn")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ball"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Crane/Ball"]
 shape = SubResource("ConvexPolygonShape3D_c44c8")
 
 [node name="Doors" type="Node3D" parent="."]
