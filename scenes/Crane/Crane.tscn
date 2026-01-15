@@ -257,6 +257,12 @@ transform = Transform3D(-4.3711385e-08, 0, -0.99999994, 0, 1, 0, 0.99999994, 0, 
 [node name="Left" type="Node3D" parent="Doors"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)
 
+[node name="HingeJoint3D" type="HingeJoint3D" parent="Doors/Left"]
+transform = Transform3D(0.9999999, 0, 0, 0, -4.371139e-08, -0.99999994, -3.5527137e-15, 0.99999994, -4.371138e-08, -0.5, 2.5, 0)
+node_a = NodePath("../Wall")
+node_b = NodePath("../Door")
+exclude_nodes_from_collision = false
+
 [node name="Wall" type="StaticBody3D" parent="Doors/Left"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2.5, 0)
 
@@ -266,23 +272,24 @@ mesh = SubResource("BoxMesh_ty3w4")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Doors/Left/Wall"]
 shape = SubResource("ConvexPolygonShape3D_smeao")
 
-[node name="Door" parent="Doors/Left" instance=ExtResource("1_xqtam")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 2.5, 0)
+[node name="Door" type="RigidBody3D" parent="Doors/Left"]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, 1, 0, 7.1054274e-15, 0, 1, -5.5000005, 2.5, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Doors/Left/Door"]
 mesh = SubResource("BoxMesh_k4ooj")
+skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Doors/Left/Door"]
 shape = SubResource("ConvexPolygonShape3D_4luiu")
 
-[node name="HingeJoint3D" type="HingeJoint3D" parent="Doors/Left"]
-transform = Transform3D(0.99999994, 0, 0, 0, -4.371139e-08, -0.99999994, 0, 1, -4.3711385e-08, -0.5, 2.5, 0)
+[node name="Right" type="Node3D" parent="Doors"]
+transform = Transform3D(-0.99999994, 0, -8.742277e-08, 0, 1, 0, 8.742277e-08, 0, -0.99999994, -10, 0, 0)
+
+[node name="HingeJoint3D" type="HingeJoint3D" parent="Doors/Right"]
+transform = Transform3D(0.99999994, -3.5527137e-15, 0, 0, -4.371139e-08, -0.99999994, 3.5527137e-15, 1, -4.3711385e-08, -0.5, 2.5, 0)
 node_a = NodePath("../Wall")
 node_b = NodePath("../Door")
 exclude_nodes_from_collision = false
-
-[node name="Right" type="Node3D" parent="Doors"]
-transform = Transform3D(-0.99999994, 0, -8.742277e-08, 0, 1, 0, 8.742277e-08, 0, -0.99999994, -10, 0, 0)
 
 [node name="Wall" type="StaticBody3D" parent="Doors/Right"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2.5, 0)
@@ -293,17 +300,12 @@ mesh = SubResource("BoxMesh_ty3w4")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Doors/Right/Wall"]
 shape = SubResource("ConvexPolygonShape3D_smeao")
 
-[node name="Door" parent="Doors/Right" instance=ExtResource("1_xqtam")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 2.5, 0)
+[node name="Door" type="RigidBody3D" parent="Doors/Right"]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, 1, 0, 7.1054274e-15, 0, 1, -5.5000005, 2.5, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Doors/Right/Door"]
 mesh = SubResource("BoxMesh_k4ooj")
+skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Doors/Right/Door"]
 shape = SubResource("ConvexPolygonShape3D_4luiu")
-
-[node name="HingeJoint3D" type="HingeJoint3D" parent="Doors/Right"]
-transform = Transform3D(0.99999994, 0, 0, 0, -4.371139e-08, -0.99999994, 0, 1, -4.3711385e-08, -0.5, 2.5, 0)
-node_a = NodePath("../Wall")
-node_b = NodePath("../Door")
-exclude_nodes_from_collision = false
