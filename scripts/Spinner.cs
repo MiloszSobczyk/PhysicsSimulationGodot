@@ -42,6 +42,13 @@ public partial class Spinner : Node3D
             UpdateTrace();
         }
     }
+    public void StopFromOutisde()
+    {
+        Stop();
+        _ui.ToggleControls(true);
+        _ui.StartStopButton.SetPressedNoSignal(false);
+    }
+
     private void ApplyTimeStep()
     {
         if (_params.TimeStep <= 0.0)
@@ -54,7 +61,6 @@ public partial class Spinner : Node3D
 
         Engine.PhysicsTicksPerSecond = ticksPerSecond;
     }
-
     private void Stop()
     {
         if (!Running) return;

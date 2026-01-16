@@ -32,6 +32,7 @@ public partial class Simulation : Node3D
     {
         if (SpinnerVisible)
         {
+            _spinner.StopFromOutisde();
             ShowCrane();
         }
         else
