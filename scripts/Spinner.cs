@@ -115,7 +115,7 @@ public partial class Spinner : Node3D
 
     private void SetupUI()
     {
-        _ui = GetNode<SpinnerUI>("SpinnerUI");
+        _ui = GetNode<SpinnerUI>("%SpinnerUI");
         _ui.ToggleControls(false);
 
         _ui.StartStopButton.SetPressedNoSignal(Running);

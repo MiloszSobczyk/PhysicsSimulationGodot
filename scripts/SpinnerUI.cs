@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
+[GlobalClass]
 public partial class SpinnerUI : Control
 {
     public Button StartStopButton { get; private set; }

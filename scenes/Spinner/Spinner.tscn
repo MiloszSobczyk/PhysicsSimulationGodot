@@ -33,6 +33,8 @@ script = ExtResource("1_g4qin")
 
 [node name="Cube" type="RigidBody3D" parent="."]
 transform = Transform3D(0.78867483, -0.57735014, -0.21132481, 0.5773501, 0.57735014, 0.57735014, -0.21132478, -0.57735014, 0.78867495, -5.9604645e-08, 0.86602545, -5.9604645e-08)
+collision_layer = 2
+collision_mask = 2
 angular_damp_mode = 1
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Cube"]
@@ -59,3 +61,4 @@ node_b = NodePath("../Cube")
 mesh = SubResource("ArrayMesh_bl7gs")
 
 [node name="SpinnerUI" parent="." instance=ExtResource("2_ss81t")]
+unique_name_in_owner = true
