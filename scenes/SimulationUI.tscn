@@ -3,7 +3,7 @@
 [node name="SimulationUI" type="CanvasLayer"]
 
 [node name="ViewSwitcher" type="CheckButton" parent="."]
-offset_left = 1045.0
-offset_right = 1153.0
+offset_left = 1556.0
+offset_right = 1664.0
 offset_bottom = 31.0
 text = "Spinner"
